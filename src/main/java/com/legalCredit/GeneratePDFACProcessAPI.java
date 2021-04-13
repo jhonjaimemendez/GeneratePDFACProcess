@@ -36,4 +36,11 @@ public class GeneratePDFACProcessAPI  implements RequestHandler<Object, String> 
 	}
 	
 	
+	public static void main(String[] args) {
+		
+		String	result = new GeneratePDFACProcess().generatePDFAccessProcess(null);
+		
+	}
+	
+	
 }

@@ -22,7 +22,7 @@ public class GeneratePDFACProcess {
 		
 		try {
 			
-			JSONObject rootJSON = new JSONObject(json);
+			//JSONObject rootJSON = new JSONObject(json);
 
 			//Se harcodea los datos de las cuentas en disputa
 			List<Account> accountInDispute = new ArrayList<Account>();
@@ -31,6 +31,7 @@ public class GeneratePDFACProcess {
 			Account account2 = new Account("6555XXXX","Thirds Date","Accounts","This accunt not belong2");
 			accountInDispute.add(account);
 			accountInDispute.add(account1);
+			accountInDispute.add(account2);
 			accountInDispute.add(account2);
 			
 
@@ -46,19 +47,19 @@ public class GeneratePDFACProcess {
 			
 			Map<String,Object> params = new HashMap<String,Object>();
 
-			params.put("bureau", "Equifax");
-			params.put("caseNumber", "1234");
-			params.put("agent", "Jhon Jaime Mendez");
-			params.put("client", "Juan");
+			params.put("bureau", "Experian");
+			params.put("caseNumber", "12341");
+			params.put("agent", "Jhon Jaime Mendez Alandete");
+			params.put("client", "Juan Mendez");
 			params.put("date", "2021-04-10");
 			params.put("dateGenerated", getDate());
 			params.put("status", "Open");
-			params.put("collectionBeanAccountDispute", accountInDispute);
+			params.put("accountInDispute", accountInDispute);
 			params.put("collectionBeanAccountNotDispute", accountNotInDispute);
 			
 			File file = generatePDF("resources/reports/templateACProcess.jrxml", params);
 			
-			result = getStringBase64(file);
+			//result = getStringBase64(file);
 			
 			
 		} catch (Exception e) {
