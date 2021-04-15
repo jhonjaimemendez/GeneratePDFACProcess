@@ -9,8 +9,13 @@
  * Copyrigth: LegalCredit
  */
 
+package com.legalCredit.model;
 
-package com.legalCedit.model;
+/**
+ * 
+ * Modelo de datos de tipo Account para ser enviado al xml del report
+ *
+ */
 
 public class Account {
 	

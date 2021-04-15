@@ -10,15 +10,14 @@
  * Copyrigth: LegalCredit
  */
 
-
 package com.legalCredit;
 
-import java.awt.GraphicsEnvironment;
-import java.util.Properties;
+import static com.legalCredit.components.Utils.invokeFonts;
 
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.RequestHandler;
-//import com.legalCredit.generateACProcess.GeneratePDFACProcess;
+import com.legalCredit.generateACProcess.GeneratePDFACProcess;
+
 
 /**
  * 
@@ -31,41 +30,40 @@ public class GeneratePDFACProcessAPI  implements RequestHandler<Object, String> 
 	@Override
 	public String handleRequest(Object input, Context context) {
 		
-		Properties props = System.getProperties();
-		props.put("sun.awt.fontconfig", "resources/properties/fontconfig.properties");
+		invokeFonts();
+	
+		String	result = new GeneratePDFACProcess().generatePDFAccessProcess(input.toString());
 		
-		
-		GraphicsEnvironment
-        .getLocalGraphicsEnvironment()
-        .getAvailableFontFamilyNames(); 
-		
-		String[] fonts = null;
-        try {
-            fonts = GraphicsEnvironment
-                    .getLocalGraphicsEnvironment()
-                    .getAvailableFontFamilyNames();
-        } catch (Exception ex) {}
-
-        fonts = GraphicsEnvironment
-                .getLocalGraphicsEnvironment()
-                .getAvailableFontFamilyNames();
-
-        System.out.println("nojodaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
-        
-        for (String font : fonts) {
-            System.out.println(font);
-        }
-		//String	result = new GeneratePDFACProcess().generatePDFAccessProcess(input.toString());
-		
-		return "nojo";//result;
+		return result;
 		
 		
 	}
 	
 	
+	
+	
 	/*public static void main(String[] args) {
 		
-		System.out.println(new java.io.File("g").getAbsolutePath());
+		Map<String, Object> output = new GeneratePDFACProcessAPI().invoke();
+		
+
+	    // フォント名
+	    for (String name : (String[]) output.get("names")) {
+	      System.out.println(name);
+	    }
+
+	    // フォント名とグリフ数
+	    for (String info : (String[]) output.get("numGlyphs")) {
+	      System.out.println(info);
+	    }
+
+	    // システム情報
+	    System.out.println(output.get("system"));
+		
+	}*/
+	
+	
+	/*	System.out.println(new java.io.File("g").getAbsolutePath());
 		Object json = "{\r\n"
 				+ "    \"dispute\": {\r\n"
 				+ "        \"sf_client_id\": \"92531165\",\r\n"

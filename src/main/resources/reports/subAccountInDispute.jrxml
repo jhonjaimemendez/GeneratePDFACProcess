@@ -38,6 +38,7 @@
 	<parameter name="numberAccountCollections" class="java.lang.String"/>
 	<parameter name="numberAccountInquires" class="java.lang.String"/>
 	<parameter name="numberAccountCredit" class="java.lang.String"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -153,62 +154,62 @@
 	</detail>
 	<columnFooter>
 		<band height="66" splitType="Stretch">
-			<staticText>
-				<reportElement x="5" y="10" width="205" height="21" uuid="93eadcff-0557-410a-83d6-652aaca015a0"/>
-				<textElement>
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Number of credit accounts to disputes:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="330" y="10" width="210" height="21" uuid="3fa57873-63b3-4863-84ad-99748a4b6a0d"/>
-				<textElement>
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Number of public accounts to disputes:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="4" y="40" width="235" height="21" uuid="d7cee86c-16e1-439f-93d6-0b290cccc831"/>
-				<textElement>
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Number of collections accounts to disputes:]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="320" y="40" width="220" height="19" uuid="ec3aac39-7f36-4d63-8bfe-0d0e7ef324b6"/>
-				<textElement>
-					<font size="12" isBold="false"/>
-				</textElement>
-				<text><![CDATA[Number of Inquires accounts to disputes:]]></text>
-			</staticText>
 			<textField>
-				<reportElement x="543" y="10" width="30" height="21" uuid="45ebde7a-e206-4d6e-8e4e-eafc92a1a4db"/>
+				<reportElement x="515" y="10" width="30" height="21" uuid="45ebde7a-e206-4d6e-8e4e-eafc92a1a4db"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{numberAccountPublics}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="215" y="10" width="30" height="21" uuid="560db907-84e2-44b5-bfa9-63fb79826c80"/>
+				<reportElement x="188" y="10" width="30" height="21" uuid="560db907-84e2-44b5-bfa9-63fb79826c80"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{numberAccountCredit}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="242" y="40" width="25" height="21" uuid="83b49a1b-add2-47b3-ac5f-591d85309e72"/>
+				<reportElement x="188" y="38" width="25" height="21" uuid="83b49a1b-add2-47b3-ac5f-591d85309e72"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{numberAccountCollections}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="546" y="40" width="30" height="19" uuid="28c938e1-21d8-4619-bda9-a3b8b7cc1d5d"/>
+				<reportElement x="515" y="40" width="30" height="19" uuid="28c938e1-21d8-4619-bda9-a3b8b7cc1d5d"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{numberAccountInquires}]]></textFieldExpression>
 			</textField>
+			<staticText>
+				<reportElement stretchType="ContainerBottom" x="4" y="9" width="175" height="21" uuid="06622814-18fa-40cb-aca1-740ef43fbf29"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Credit accounts to disputes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="3" y="39" width="215" height="21" uuid="94f51a4b-f934-4339-981b-084c69a473c3"/>
+				<textElement>
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Collections accounts to disputes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="39" width="190" height="19" uuid="75ad4387-3d69-4851-9e6d-fa0d83e218c8"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Inquires accounts to disputes:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="329" y="9" width="180" height="21" uuid="e103aa9e-2e76-4cd9-8dfd-90522471588c"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<text><![CDATA[Public accounts to disputes:]]></text>
+			</staticText>
 		</band>
 	</columnFooter>
 </jasperReport>

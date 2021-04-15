@@ -11,30 +11,16 @@
 		<field name="type" class="java.lang.String"/>
 		<field name="reason" class="java.lang.String"/>
 	</subDataset>
-	<parameter name="bureau" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["Equifax"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="caseNumber" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["1245"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="agent" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["Jhon Jaime Mendez"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="client" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["Juan"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="date" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["2021-01-02"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="dateGenerated" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["2021-09-04"]]></defaultValueExpression>
-	</parameter>
-	<parameter name="status" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["Open"]]></defaultValueExpression>
-	</parameter>
+	<parameter name="bureau" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="caseNumber" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="agent" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="client" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="date" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="dateGenerated" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="status" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="accountInDispute" class="java.util.List" isForPrompting="false"/>
 	<parameter name="numberAccountPublics" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="numberAccountCollections" class="java.lang.String"/>
+	<parameter name="numberAccountCollections" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="numberAccountInquires" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="numberAccountCredit" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="numberAccountPublicNotDispute" class="java.lang.String" isForPrompting="false"/>
@@ -42,6 +28,9 @@
 	<parameter name="numberAccountCreditNotDispute" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="numberAccountInquiresNotDispute" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="accountNotInDispute" class="java.util.List" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR_AccountInDispute" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="SUBREPORT_DIR_AccountNotInDispute" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
+	<parameter name="LOGO" class="java.awt.Image" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -60,14 +49,14 @@
 			</staticText>
 			<image>
 				<reportElement x="0" y="0" width="110" height="40" uuid="430e1d1e-29b6-450d-bf55-00c4b909bd61"/>
-				<imageExpression><![CDATA["resources//images//logoVerde.png"]]></imageExpression>
+				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="83">
 			<staticText>
-				<reportElement x="0" y="14" width="50" height="20" forecolor="#000000" uuid="bd665379-e63c-46ac-99ab-dcc113359a9e"/>
+				<reportElement x="0" y="14" width="60" height="20" forecolor="#000000" uuid="bd665379-e63c-46ac-99ab-dcc113359a9e"/>
 				<textElement>
 					<font fontName="SansSerif" size="12" isBold="true"/>
 				</textElement>
@@ -81,7 +70,7 @@
 				<textFieldExpression><![CDATA[$P{bureau}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="180" y="14" width="40" height="20" uuid="3d0b86c6-35b8-4fd8-9b98-c0ad77214f84"/>
+				<reportElement x="165" y="14" width="55" height="20" uuid="3d0b86c6-35b8-4fd8-9b98-c0ad77214f84"/>
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -109,7 +98,7 @@
 				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="50" width="50" height="20" uuid="7fb330e8-3655-418f-af66-75471ce49955"/>
+				<reportElement x="0" y="50" width="60" height="20" uuid="7fb330e8-3655-418f-af66-75471ce49955"/>
 				<textElement textAlignment="Left">
 					<font size="12" isBold="true"/>
 				</textElement>
@@ -172,7 +161,7 @@
 					<subreportParameterExpression><![CDATA[$P{numberAccountPublics}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
-				<subreportExpression><![CDATA["resources\\reports\\subAccountInDispute.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR_AccountInDispute}]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="50">
@@ -194,21 +183,21 @@
 					<subreportParameterExpression><![CDATA[$P{numberAccountPublicNotDispute}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
-				<subreportExpression><![CDATA["resources\\reports\\subAccountNotInDispute.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR_AccountNotInDispute}]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
 	<pageFooter>
 		<band height="31" splitType="Stretch">
 			<staticText>
-				<reportElement x="-1" y="4" width="80" height="20" uuid="a3719516-5472-4e48-8ae8-a319991ee6d4"/>
+				<reportElement x="-1" y="4" width="111" height="20" uuid="a3719516-5472-4e48-8ae8-a319991ee6d4"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Report Date:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="81" y="3" width="100" height="21" uuid="0e742da8-3635-4e79-852b-89d90297033b"/>
+				<reportElement x="86" y="3" width="79" height="21" uuid="0e742da8-3635-4e79-852b-89d90297033b"/>
 				<textElement>
 					<font size="12" isBold="true"/>
 				</textElement>
