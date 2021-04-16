@@ -17,16 +17,27 @@ package com.legalCredit.model;
  *
  */
 
-public class Account {
+public class Account implements Comparable<Account>{
 	
 	private String accountNumber;
 	private String accountName;
 	private String type;
 	private String reason;
+	private String bureau;
 	
 	
 	public Account() {}
 	
+	public Account(String accountNumber, String accountName, String type, String reason, String bureau) {
+		
+		this.accountNumber = accountNumber;
+		this.accountName = accountName;
+		this.type = type;
+		this.reason = reason;
+		this.bureau = bureau;
+	}
+
+
 	public Account(String accountNumber, String accountName, String type, String reason) {
 		
 		this.accountNumber = accountNumber;
@@ -62,6 +73,10 @@ public class Account {
 		return type;
 	}
 
+	public String getBureau() {
+		return bureau;
+	}
+	
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -72,6 +87,17 @@ public class Account {
 
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+	
+	public void setBureau(String bureau) {
+		this.bureau = bureau;
+	}
+
+
+	@Override
+	public int compareTo(Account o) {
+		// TODO Auto-generated method stub
+		return this.type.compareTo(o.getType());
 	}
 
 }

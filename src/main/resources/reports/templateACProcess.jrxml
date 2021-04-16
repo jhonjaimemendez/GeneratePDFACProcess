@@ -11,7 +11,6 @@
 		<field name="type" class="java.lang.String"/>
 		<field name="reason" class="java.lang.String"/>
 	</subDataset>
-	<parameter name="bureau" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="caseNumber" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="agent" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="client" class="java.lang.String" isForPrompting="false"/>
@@ -39,7 +38,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="55" splitType="Stretch">
+		<band height="134" splitType="Stretch">
 			<staticText>
 				<reportElement x="340" y="0" width="215" height="40" uuid="2d4f875f-00a3-4aec-af89-3f69fe85b2ae"/>
 				<textElement textAlignment="Right">
@@ -51,96 +50,83 @@
 				<reportElement x="0" y="0" width="110" height="40" uuid="430e1d1e-29b6-450d-bf55-00c4b909bd61"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
 			</image>
-		</band>
-	</title>
-	<columnHeader>
-		<band height="83">
 			<staticText>
-				<reportElement x="0" y="14" width="60" height="20" forecolor="#000000" uuid="bd665379-e63c-46ac-99ab-dcc113359a9e"/>
-				<textElement>
-					<font fontName="SansSerif" size="12" isBold="true"/>
+				<reportElement x="0" y="64" width="60" height="20" uuid="7fb330e8-3655-418f-af66-75471ce49955"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Bureau:]]></text>
+				<text><![CDATA[# Case:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="52" y="14" width="90" height="20" uuid="cbe6ea34-acaa-41d5-a223-41b558fe2dc8"/>
+			<staticText>
+				<reportElement x="4" y="100" width="50" height="20" uuid="957a84eb-e64f-4926-9bc9-7345782392f6"/>
+				<textElement textAlignment="Left">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Agent:]]></text>
+			</staticText>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="46" y="100" width="129" height="20" uuid="1bc5c7db-1d61-41b9-be61-da63f46a28cf"/>
 				<textElement verticalAlignment="Top">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{bureau}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{agent}]]></textFieldExpression>
 			</textField>
-			<staticText>
-				<reportElement x="165" y="14" width="55" height="20" uuid="3d0b86c6-35b8-4fd8-9b98-c0ad77214f84"/>
-				<textElement textAlignment="Right">
-					<font size="12" isBold="true"/>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="47" y="64" width="128" height="20" uuid="acfee9c5-8043-49b1-8f02-4efd678888b5"/>
+				<textElement verticalAlignment="Top">
+					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Name:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="226" y="14" width="176" height="20" uuid="b22016bd-524d-4224-a4c7-282d411a75c5"/>
+				<textFieldExpression><![CDATA[$P{caseNumber}]]></textFieldExpression>
+			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="229" y="64" width="191" height="20" uuid="b22016bd-524d-4224-a4c7-282d411a75c5"/>
 				<textElement verticalAlignment="Top">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{client}]]></textFieldExpression>
 			</textField>
+			<textField textAdjust="StretchHeight">
+				<reportElement x="229" y="100" width="324" height="20" uuid="e8bbbbd6-bfac-4b3e-b0a3-af9442b6a9c2"/>
+				<textElement verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{status}]]></textFieldExpression>
+			</textField>
 			<staticText>
-				<reportElement x="440" y="14" width="40" height="20" uuid="2c4e2a66-bdf6-44d4-a264-2f658fc277b9"/>
+				<reportElement x="174" y="100" width="50" height="20" uuid="a897f60b-fd21-44e8-b82f-ab64c454198b"/>
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Date:]]></text>
+				<text><![CDATA[Status:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="169" y="64" width="55" height="20" uuid="3d0b86c6-35b8-4fd8-9b98-c0ad77214f84"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Client:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="484" y="14" width="75" height="20" uuid="3ef340ca-4ea7-4561-986e-f28937c91471"/>
+				<reportElement x="489" y="64" width="75" height="20" uuid="3ef340ca-4ea7-4561-986e-f28937c91471"/>
 				<textElement verticalAlignment="Top">
 					<font size="12"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="50" width="60" height="20" uuid="7fb330e8-3655-418f-af66-75471ce49955"/>
-				<textElement textAlignment="Left">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[# Case:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="52" y="50" width="90" height="20" uuid="acfee9c5-8043-49b1-8f02-4efd678888b5"/>
-				<textElement verticalAlignment="Top">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{caseNumber}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="170" y="50" width="50" height="20" uuid="957a84eb-e64f-4926-9bc9-7345782392f6"/>
+				<reportElement x="410" y="64" width="73" height="20" uuid="2c4e2a66-bdf6-44d4-a264-2f658fc277b9"/>
 				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Agent:]]></text>
+				<text><![CDATA[Init Date:]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="226" y="50" width="176" height="20" uuid="1bc5c7db-1d61-41b9-be61-da63f46a28cf"/>
-				<textElement verticalAlignment="Top">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{agent}]]></textFieldExpression>
-			</textField>
-			<staticText>
-				<reportElement x="430" y="50" width="50" height="20" uuid="a897f60b-fd21-44e8-b82f-ab64c454198b"/>
-				<textElement textAlignment="Right">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Status:]]></text>
-			</staticText>
-			<textField>
-				<reportElement x="482" y="50" width="72" height="20" uuid="e8bbbbd6-bfac-4b3e-b0a3-af9442b6a9c2"/>
-				<textElement verticalAlignment="Top">
-					<font size="12"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{status}]]></textFieldExpression>
-			</textField>
+			<line>
+				<reportElement x="0" y="50" width="551" height="1" uuid="c586a6e8-8cb8-4c92-809c-f372bb70fc71">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+			</line>
 		</band>
-	</columnHeader>
+	</title>
 	<detail>
 		<band height="39" splitType="Stretch">
 			<subreport>
