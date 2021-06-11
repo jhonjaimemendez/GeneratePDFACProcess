@@ -46,7 +46,7 @@ public class GeneratePDFACProcessAPI  implements RequestStreamHandler, RequestHa
 		
 		invokeFonts();
 		
-		String	result = new GeneratePDFACProcess().generatePDFAccessProcess(IOUtils.toString(input, "UTF-8"), context);
+		String	result = new GeneratePDFACProcess().generatePDFAccessProcess(IOUtils.toString(input, "UTF-8"));
 		
 		output.write(result.getBytes());
 		

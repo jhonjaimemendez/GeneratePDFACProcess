@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="json_access_var" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="80e30745-0db9-476f-8bbb-cbc60d1ca90f">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="JsonTest2"/>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="DatasetMain" uuid="7918eaef-d2f7-4cdd-9b84-e2660b2bfed8">
+		<parameter name="mainDatasource" class="net.sf.jasperreports.engine.data.JsonDataSource"/>
+		<queryString language="JSON">
+			<![CDATA[]]>
+		</queryString>
+		<field name="key" class="java.lang.String">
+			<fieldDescription><![CDATA[key]]></fieldDescription>
+		</field>
+	</subDataset>
+	<subDataset name="DatasetTitle" uuid="7918eaef-d2f7-4cdd-9b84-e2660b2bfed8">
+		<queryString language="JSON">
+			<![CDATA[]]>
+		</queryString>
+		<field name="parameter1" class="java.lang.String">
+			<fieldDescription><![CDATA[parameter1]]></fieldDescription>
+		</field>
+	</subDataset>
+	<parameter name="JSON_INPUT_STREAM" class="java.io.InputStream" isForPrompting="false"/>
+	<queryString language="JSON">
+		<![CDATA[]]>
+	</queryString>
+	<summary>
+		<band height="260" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="200" height="60" uuid="40093b50-bd8d-4d56-8d1d-9f2e9cf86106">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="DatasetMain" uuid="0247b2fb-527b-4dc2-af7f-9bcd75e8715a">
+						<datasetParameter name="mainDatasource">
+							<datasetParameterExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE})]]></datasetParameterExpression>
+						</datasetParameter>
+						<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{REPORT_DATA_SOURCE}).subDataSource("second")]]></dataSourceExpression>
+					</datasetRun>
+					<jr:column width="200" uuid="25910003-959c-4e31-a91e-555e4aaf0bec">
+						<jr:columnHeader style="Table_CH" height="30">
+							<componentElement>
+								<reportElement x="0" y="0" width="200" height="30" uuid="da5b13da-671f-4eb6-bbf1-e455b293e4ce"/>
+								<jr:list printOrder="Vertical">
+									<datasetRun subDataset="DatasetTitle" uuid="d0a6bf94-cec6-4a75-96ec-4ae046ee90cc">
+										<dataSourceExpression><![CDATA[((net.sf.jasperreports.engine.data.JsonDataSource)$P{mainDatasource}).subDataSource("first")]]></dataSourceExpression>
+									</datasetRun>
+									<jr:listContents height="30" width="200">
+										<textField>
+											<reportElement x="0" y="0" width="200" height="30" uuid="2cd239b8-93ac-4cd2-82eb-f22db96dd010"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle"/>
+											<textFieldExpression><![CDATA[$F{parameter1}]]></textFieldExpression>
+										</textField>
+									</jr:listContents>
+								</jr:list>
+							</componentElement>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="200" height="30" uuid="24b2ba9b-57d0-4840-8333-70247f595e21"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{key}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</summary>
+</jasperReport>

@@ -77,11 +77,11 @@
 					<datasetRun subDataset="CollectionAccountDispute" uuid="ed28406e-348d-412d-8e42-37b7a9f011cd">
 						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{accountInDispute})]]></dataSourceExpression>
 					</datasetRun>
-					<jr:column width="118" uuid="5be4e1e9-0266-43b4-89bd-ac98fa5ad0e9">
+					<jr:column width="122" uuid="5be4e1e9-0266-43b4-89bd-ac98fa5ad0e9">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:columnHeader style="Table_CH" height="25" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="118" height="25" uuid="b7f0d759-7c58-4b7f-8263-0d5487939c2d"/>
+								<reportElement x="0" y="0" width="122" height="25" uuid="b7f0d759-7c58-4b7f-8263-0d5487939c2d"/>
 								<textElement>
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -90,16 +90,16 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField textAdjust="StretchHeight">
-								<reportElement x="0" y="0" width="118" height="25" uuid="e6eade67-ebde-4e4b-bb4a-63e4d818b279"/>
+								<reportElement x="0" y="0" width="122" height="25" uuid="e6eade67-ebde-4e4b-bb4a-63e4d818b279"/>
 								<textFieldExpression><![CDATA[$F{accountNumber}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="117" uuid="e496c8f4-942b-4f40-9bb3-160a6a120138">
+					<jr:column width="119" uuid="e496c8f4-942b-4f40-9bb3-160a6a120138">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:columnHeader style="Table_CH" height="25" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="117" height="25" uuid="9f80e7e5-0412-401f-b381-6c937b9b82a1"/>
+								<reportElement x="0" y="0" width="119" height="25" uuid="9f80e7e5-0412-401f-b381-6c937b9b82a1"/>
 								<textElement>
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -108,16 +108,16 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField textAdjust="StretchHeight">
-								<reportElement x="0" y="0" width="117" height="25" uuid="0baf5d49-4433-4395-a482-871d2e342cb4"/>
+								<reportElement x="0" y="0" width="119" height="25" uuid="0baf5d49-4433-4395-a482-871d2e342cb4"/>
 								<textFieldExpression><![CDATA[$F{accountName}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="93" uuid="fd5357b6-907b-4beb-9631-55d5e22b59c1">
+					<jr:column width="90" uuid="fd5357b6-907b-4beb-9631-55d5e22b59c1">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:columnHeader style="Table_CH" height="25" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="93" height="25" uuid="18b10d3a-75d3-4671-ae7c-1b534211c3b1"/>
+								<reportElement x="0" y="0" width="90" height="25" uuid="18b10d3a-75d3-4671-ae7c-1b534211c3b1"/>
 								<textElement>
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -126,16 +126,16 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField>
-								<reportElement x="0" y="0" width="93" height="25" uuid="76b5ff19-7d1f-496f-a2d3-dc3014e2ad50"/>
+								<reportElement x="0" y="0" width="90" height="25" uuid="76b5ff19-7d1f-496f-a2d3-dc3014e2ad50"/>
 								<textFieldExpression><![CDATA[$F{bureau}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="72" uuid="7bf52a88-c977-4c78-840b-3ec7fd80eb69">
+					<jr:column width="70" uuid="7bf52a88-c977-4c78-840b-3ec7fd80eb69">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:columnHeader style="Table_CH" height="25" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="72" height="25" uuid="3bc03681-e33b-4099-bdbd-42a1f32f0aa8"/>
+								<reportElement x="0" y="0" width="70" height="25" uuid="3bc03681-e33b-4099-bdbd-42a1f32f0aa8"/>
 								<textElement>
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -144,16 +144,16 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField>
-								<reportElement x="0" y="0" width="72" height="25" uuid="1049d1af-1521-4768-b3be-6436469631ed"/>
+								<reportElement x="0" y="0" width="70" height="25" uuid="1049d1af-1521-4768-b3be-6436469631ed"/>
 								<textFieldExpression><![CDATA[$F{type}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="160" uuid="0bccb1b0-fe80-4c0a-ac23-0b0934f5747a">
+					<jr:column width="159" uuid="0bccb1b0-fe80-4c0a-ac23-0b0934f5747a">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:columnHeader style="Table_CH" height="25" rowSpan="1">
 							<staticText>
-								<reportElement x="0" y="0" width="160" height="25" uuid="c98e4938-8556-44d2-b5c6-a78817e534ac"/>
+								<reportElement x="0" y="0" width="159" height="25" uuid="c98e4938-8556-44d2-b5c6-a78817e534ac"/>
 								<textElement>
 									<font size="12" isBold="true"/>
 								</textElement>
@@ -162,7 +162,7 @@
 						</jr:columnHeader>
 						<jr:detailCell style="Table_TD" height="25">
 							<textField textAdjust="StretchHeight">
-								<reportElement x="0" y="0" width="160" height="25" uuid="03a1c472-e3dc-482c-bbd9-3affeed9b2e2"/>
+								<reportElement x="0" y="0" width="159" height="25" uuid="03a1c472-e3dc-482c-bbd9-3affeed9b2e2"/>
 								<textFieldExpression><![CDATA[$F{reason}]]></textFieldExpression>
 							</textField>
 						</jr:detailCell>

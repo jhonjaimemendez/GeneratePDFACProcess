@@ -31,7 +31,7 @@ public class GeneratePDFACProcess {
 	 * @param json
 	 * @return Devuelve el formato en base 64
 	 */
-	public String generatePDFAccessProcess(String json, Context context) {
+	public String generatePDFAccessProcess(String json) {
 
 		String result = null;
 
@@ -43,24 +43,24 @@ public class GeneratePDFACProcess {
 			JSONObject assigned_agent = dispute.getJSONObject("assigned_agent");
 			JSONObject account = dispute.getJSONObject("account");
 			JSONObject status = dispute.getJSONObject("status");
-			JSONArray items_to_dispute = ac_payload.getJSONArray("items_to_dispute");
-			JSONArray items_not_to_dispute = ac_payload.getJSONArray("items_not_to_dispute");
+			JSONArray items_to_dispute = getValueArray(ac_payload,"items_to_dispute");
+			JSONArray items_not_to_dispute = getValueArray(ac_payload,"items_not_to_dispute");
 
 			//******************* Se obtienen las cuentas en disputa ****************************** 
 			List<Account> accountInDispute = getListAccount(items_to_dispute);
-			
+
 			//******************* Se obtienen las cuentas en no disputa************************** 
 			List<Account> accountNotInDispute = getListAccount(items_not_to_dispute); 
 
 			Map<String,Object> params = new HashMap<String,Object>();
 
 			//Se definen los parametros del encabezado del reporte 
-			params.put("caseNumber", dispute.get("case_number"));
-			params.put("agent", assigned_agent.get("full_name")); 
-			params.put("client",account.get("first_name") + " " + account.get("last_name")); 
-			params.put("date",dispute.get("init_date")); 
+			params.put("caseNumber", getValue(dispute,"case_number"));
+			params.put("agent", getValue(assigned_agent,"full_name")); 
+			params.put("client",getValue(account,"first_name")); 
+			params.put("date",getValue(dispute,"init_date")); 
 			params.put("dateGenerated", getDate());
-			params.put("status",status.get("name"));
+			params.put("status",getValue(status,"name"));
 			params.put("numberAccountPublics",getNumberTypeAccont(accountInDispute,"public"));
 			params.put("numberAccountCollections",getNumberTypeAccont(accountInDispute,"collection"));
 			params.put("numberAccountInquires",getNumberTypeAccont(accountInDispute,"inquiry"));
@@ -81,13 +81,13 @@ public class GeneratePDFACProcess {
 			params.put("SUBREPORT_DIR_AccountNotInDispute", subReportAccountNotInDispute);
 
 			InputStream inImageLogo = getClass().getResourceAsStream("/resources/images/logoVerde.png");
-	        Image imageLogo = ImageIO.read(inImageLogo);
-	        params.put("LOGO",imageLogo);
+			Image imageLogo = ImageIO.read(inImageLogo);
+			params.put("LOGO",imageLogo);
 
 			File file = generatePDF("resources/reports/templateACProcess.jasper",params);
 
 			result = getStringBase64(file);
-			
+
 
 		} catch (Exception e) {
 
@@ -113,39 +113,55 @@ public class GeneratePDFACProcess {
 
 	}
 
-	
-	
+
+
 	/**
 	 * Devuelve el listado de cuentas
 	 * @param items
 	 * @return
 	 */
 	private List<Account> getListAccount(JSONArray items) {
-		
-		List<Account> accounts = new ArrayList<Account>(); 
-		
-		for (int i = 0; i < items.length(); i++) {
 
-			JSONObject item = items.getJSONObject(i);
-			JSONObject bureau = item.has("bureau") ? item.getJSONObject("bureau") : null;
-			JSONObject credit_report_item = item.has("credit_report_item") ? item.getJSONObject("credit_report_item") : item;
-			JSONObject dispute_item = item.has("dispute_item") ? item.getJSONObject("dispute_item") : item;
-			JSONObject reason = dispute_item != null && dispute_item.has("reason") ? dispute_item.getJSONObject("reason") : null;
-			
-			Account account = new Account();
-			account.setAccountNumber(!credit_report_item.get("account_number").toString().equals("null")  ? 
-					                  credit_report_item.getString("account_number") : "");
-			account.setAccountName(credit_report_item.getString("account_name"));
-			account.setType(credit_report_item != null ? credit_report_item.getString("item_type") : "");
-			account.setReason(reason != null ? reason.getString("name") : "");
-			account.setBureau( bureau != null ? bureau.getString("name") : "");
-			accounts.add(account);
-			
+		List<Account> accounts = new ArrayList<Account>();
+
+		if (items != null) {
+
+			for (int i = 0; i < items.length(); i++) {
+
+				JSONObject item = items.getJSONObject(i);
+				JSONObject bureau = item.has("bureau") ? item.getJSONObject("bureau") : null;
+				JSONObject credit_report_item = item.has("credit_report_item") ? item.getJSONObject("credit_report_item") : item;
+				JSONObject dispute_item = item.has("dispute_item") ? item.getJSONObject("dispute_item") : item;
+				JSONObject reason = dispute_item != null && dispute_item.has("reason") ? dispute_item.getJSONObject("reason") : null;
+
+				Account account = new Account();
+				account.setAccountNumber(!credit_report_item.get("account_number").toString().equals("null")  ? 
+						credit_report_item.getString("account_number") : "");
+				account.setAccountName(credit_report_item.getString("account_name"));
+				account.setType(credit_report_item != null ? credit_report_item.getString("item_type") : "");
+				account.setReason(reason != null ? reason.getString("name") : "");
+				account.setBureau( bureau != null ? bureau.getString("name") : "");
+				accounts.add(account);
+
+			}
+
+			Collections.sort(accounts);
+
 		}
-		
-		Collections.sort(accounts);
-		
+
 		return accounts;
+	}
+
+	private String getValue(JSONObject jsonObject, String key) {
+
+		return jsonObject.get(key).toString().equals("null") ? "" : jsonObject.get(key).toString();
+
+	}
+	
+	private JSONArray getValueArray(JSONObject jsonObject, String key) {
+
+		return jsonObject.get(key).toString().equals("null") ? null : jsonObject.getJSONArray(key);
+
 	}
 
 }
