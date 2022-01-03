@@ -30,70 +30,62 @@ public class GeneratePDFACProcess {
 	 * 
 	 * @param json
 	 * @return Devuelve el formato en base 64
+	 * @throws Exception 
 	 */
-	public String generatePDFAccessProcess(String json) {
+	public String generatePDFAccessProcess(String json) throws Exception {
 
 		String result = null;
 
-		try {
+		JSONObject rootJSON = new JSONObject(json);
+		JSONObject ac_payload = rootJSON.getJSONObject("ac_payload"); 
+		JSONObject dispute = ac_payload.getJSONObject("dispute");
+		JSONObject assigned_agent = dispute.getJSONObject("assigned_agent");
+		JSONObject account = dispute.getJSONObject("account");
+		JSONObject status = dispute.getJSONObject("status");
+		JSONArray items_to_dispute = getValueArray(ac_payload,"items_to_dispute");
+		JSONArray items_not_to_dispute = getValueArray(ac_payload,"items_not_to_dispute");
 
-			JSONObject rootJSON = new JSONObject(json);
-			JSONObject ac_payload = rootJSON.getJSONObject("ac_payload"); 
-			JSONObject dispute = ac_payload.getJSONObject("dispute");
-			JSONObject assigned_agent = dispute.getJSONObject("assigned_agent");
-			JSONObject account = dispute.getJSONObject("account");
-			JSONObject status = dispute.getJSONObject("status");
-			JSONArray items_to_dispute = getValueArray(ac_payload,"items_to_dispute");
-			JSONArray items_not_to_dispute = getValueArray(ac_payload,"items_not_to_dispute");
+		//******************* Se obtienen las cuentas en disputa ****************************** 
+		List<Account> accountInDispute = getListAccount(items_to_dispute);
 
-			//******************* Se obtienen las cuentas en disputa ****************************** 
-			List<Account> accountInDispute = getListAccount(items_to_dispute);
+		//******************* Se obtienen las cuentas en no disputa************************** 
+		List<Account> accountNotInDispute = getListAccount(items_not_to_dispute); 
 
-			//******************* Se obtienen las cuentas en no disputa************************** 
-			List<Account> accountNotInDispute = getListAccount(items_not_to_dispute); 
+		Map<String,Object> params = new HashMap<String,Object>();
 
-			Map<String,Object> params = new HashMap<String,Object>();
+		//Se definen los parametros del encabezado del reporte 
+		params.put("caseNumber", getValue(dispute,"case_number"));
+		params.put("agent", getValue(assigned_agent,"full_name")); 
+		params.put("client",getValue(account,"first_name")); 
+		params.put("date",getValue(dispute,"init_date")); 
+		params.put("dateGenerated", getDate());
+		params.put("status",getValue(status,"name"));
+		params.put("numberAccountPublics",getNumberTypeAccont(accountInDispute,"public"));
+		params.put("numberAccountCollections",getNumberTypeAccont(accountInDispute,"collection"));
+		params.put("numberAccountInquires",getNumberTypeAccont(accountInDispute,"inquiry"));
+		params.put("numberAccountCredit",getNumberTypeAccont(accountInDispute,"credit"));
+		params.put("accountInDispute", accountInDispute);
+		params.put("numberAccountPublicNotDispute", getNumberTypeAccont(accountNotInDispute,"public"));
+		params.put("numberAccountCollectionsNotDispute",getNumberTypeAccont(accountNotInDispute,"collection"));
+		params.put("numberAccountInquiresNotDispute",getNumberTypeAccont(accountNotInDispute,"inquiry"));
+		params.put("numberAccountCreditNotDispute",getNumberTypeAccont(accountNotInDispute,"credit"));
+		params.put("accountNotInDispute", accountNotInDispute);
 
-			//Se definen los parametros del encabezado del reporte 
-			params.put("caseNumber", getValue(dispute,"case_number"));
-			params.put("agent", getValue(assigned_agent,"full_name")); 
-			params.put("client",getValue(account,"first_name")); 
-			params.put("date",getValue(dispute,"init_date")); 
-			params.put("dateGenerated", getDate());
-			params.put("status",getValue(status,"name"));
-			params.put("numberAccountPublics",getNumberTypeAccont(accountInDispute,"public"));
-			params.put("numberAccountCollections",getNumberTypeAccont(accountInDispute,"collection"));
-			params.put("numberAccountInquires",getNumberTypeAccont(accountInDispute,"inquiry"));
-			params.put("numberAccountCredit",getNumberTypeAccont(accountInDispute,"credit"));
-			params.put("accountInDispute", accountInDispute);
-			params.put("numberAccountPublicNotDispute", getNumberTypeAccont(accountNotInDispute,"public"));
-			params.put("numberAccountCollectionsNotDispute",getNumberTypeAccont(accountNotInDispute,"collection"));
-			params.put("numberAccountInquiresNotDispute",getNumberTypeAccont(accountNotInDispute,"inquiry"));
-			params.put("numberAccountCreditNotDispute",getNumberTypeAccont(accountNotInDispute,"credit"));
-			params.put("accountNotInDispute", accountNotInDispute);
+		InputStream inSRAccountInDispute = getClass().getResourceAsStream("/resources/reports/subAccountInDispute.jasper"); 
+		JasperReport subReportinSRAccountInDispute = (JasperReport)JRLoader.loadObject(inSRAccountInDispute); 
+		params.put("SUBREPORT_DIR_AccountInDispute", subReportinSRAccountInDispute);
 
-			InputStream inSRAccountInDispute = getClass().getResourceAsStream("/resources/reports/subAccountInDispute.jasper"); 
-			JasperReport subReportinSRAccountInDispute = (JasperReport)JRLoader.loadObject(inSRAccountInDispute); 
-			params.put("SUBREPORT_DIR_AccountInDispute", subReportinSRAccountInDispute);
+		InputStream inSRAccountNotInDispute = getClass().getResourceAsStream("/resources/reports/subAccountNotInDispute.jasper"); 
+		JasperReport subReportAccountNotInDispute = (JasperReport)JRLoader.loadObject(inSRAccountNotInDispute); 
+		params.put("SUBREPORT_DIR_AccountNotInDispute", subReportAccountNotInDispute);
 
-			InputStream inSRAccountNotInDispute = getClass().getResourceAsStream("/resources/reports/subAccountNotInDispute.jasper"); 
-			JasperReport subReportAccountNotInDispute = (JasperReport)JRLoader.loadObject(inSRAccountNotInDispute); 
-			params.put("SUBREPORT_DIR_AccountNotInDispute", subReportAccountNotInDispute);
+		InputStream inImageLogo = getClass().getResourceAsStream("/resources/images/logoVerde.png");
+		Image imageLogo = ImageIO.read(inImageLogo);
+		params.put("LOGO",imageLogo);
 
-			InputStream inImageLogo = getClass().getResourceAsStream("/resources/images/logoVerde.png");
-			Image imageLogo = ImageIO.read(inImageLogo);
-			params.put("LOGO",imageLogo);
+		File file = generatePDF("resources/reports/templateACProcess.jasper",params);
 
-			File file = generatePDF("resources/reports/templateACProcess.jasper",params);
-
-			result = getStringBase64(file);
-
-
-		} catch (Exception e) {
-
-			e.printStackTrace(); 
-
-		}
+		result = getStringBase64(file);
 
 		return result;
 
@@ -133,11 +125,16 @@ public class GeneratePDFACProcess {
 				JSONObject credit_report_item = item.has("credit_report_item") ? item.getJSONObject("credit_report_item") : item;
 				JSONObject dispute_item = item.has("dispute_item") ? item.getJSONObject("dispute_item") : item;
 				JSONObject reason = dispute_item != null && dispute_item.has("reason") ? dispute_item.getJSONObject("reason") : null;
-
+				
+				String accountName = credit_report_item.getString("account_name");
+				accountName = accountName.length() >0 ? accountName.substring(0,1).toUpperCase() + accountName.substring(1) : accountName;  
+				
+				
 				Account account = new Account();
 				account.setAccountNumber(!credit_report_item.get("account_number").toString().equals("null")  ? 
 						credit_report_item.getString("account_number") : "");
-				account.setAccountName(credit_report_item.getString("account_name"));
+				account.setAccountName(accountName);
+				account.setBureau(bureau.getString("name"));	
 				account.setType(credit_report_item != null ? credit_report_item.getString("item_type") : "");
 				account.setReason(reason != null ? reason.getString("name") : "");
 				account.setBureau( bureau != null ? bureau.getString("name") : "");
@@ -157,7 +154,7 @@ public class GeneratePDFACProcess {
 		return jsonObject.get(key).toString().equals("null") ? "" : jsonObject.get(key).toString();
 
 	}
-	
+
 	private JSONArray getValueArray(JSONObject jsonObject, String key) {
 
 		return jsonObject.get(key).toString().equals("null") ? null : jsonObject.getJSONArray(key);

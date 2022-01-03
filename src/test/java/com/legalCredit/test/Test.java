@@ -18,7 +18,7 @@ public class Test {
 		try {
 			
 			String pathHome = "c:\\temp\\";
-			String nameFile = "test3.json";
+			String nameFile = "test.json";
 			String ruta = pathHome + nameFile;
 			String rutaSalida = "C:\\temp\\reportes\\ArchivosGenerados\\"
 					+ "acprocess" +  Utils.getDateTime() + ".pdf";
@@ -39,7 +39,7 @@ public class Test {
 				System.err.println("Couldn't write to file...");
 			}
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 
 			e.printStackTrace();
 

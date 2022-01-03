@@ -24,6 +24,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.json.JSONObject;
+
 /**
  * 
  * Metodos genericos para ser reutilizados
@@ -111,6 +113,15 @@ public class Utils {
 		} catch (SecurityException e) {
 			return e.toString();
 		}
+	}
+	
+public static JSONObject getError(String errorMEssage) {
+		
+		JSONObject  jsonObject = new JSONObject();
+		jsonObject.put("isBase64Encoded", false);
+		jsonObject.put("status",500);
+		jsonObject.put("body", errorMEssage);
+		return jsonObject;
 	}
 
 

@@ -13,6 +13,7 @@
 package com.legalCredit;
 
 import static com.legalCredit.components.Utils.invokeFonts;
+import static com.legalCredit.components.Utils.getError;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,9 +47,21 @@ public class GeneratePDFACProcessAPI  implements RequestStreamHandler, RequestHa
 		
 		invokeFonts();
 		
-		String	result = new GeneratePDFACProcess().generatePDFAccessProcess(IOUtils.toString(input, "UTF-8"));
+		String payload = IOUtils.toString(input, "UTF-8");
+		 
+		try {
+			
+			String result = new GeneratePDFACProcess().generatePDFAccessProcess(payload);
+			output.write(result.getBytes());
+			
+		} catch (Exception e) {
+			
+			System.out.println(payload);
+			
+			throw new RuntimeException(getError(e.getMessage()).toString());
+			
+		} 
 		
-		output.write(result.getBytes());
 		
 	}
 		
