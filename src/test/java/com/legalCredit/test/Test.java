@@ -18,7 +18,7 @@ public class Test {
 		try {
 			
 			String pathHome = "c:\\temp\\";
-			String nameFile = "test.json";
+			String nameFile = "test1.json";
 			String ruta = pathHome + nameFile;
 			String rutaSalida = "C:\\temp\\reportes\\ArchivosGenerados\\"
 					+ "acprocess" +  Utils.getDateTime() + ".pdf";

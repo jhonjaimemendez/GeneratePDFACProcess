@@ -34,6 +34,7 @@ public class GeneratePDFACProcess {
 	 */
 	public String generatePDFAccessProcess(String json) throws Exception {
 
+		System.out.println("Se obtiene los datos del payload!!!");
 		String result = null;
 
 		JSONObject rootJSON = new JSONObject(json);
@@ -44,7 +45,7 @@ public class GeneratePDFACProcess {
 		JSONObject status = dispute.getJSONObject("status");
 		JSONArray items_to_dispute = getValueArray(ac_payload,"items_to_dispute");
 		JSONArray items_not_to_dispute = getValueArray(ac_payload,"items_not_to_dispute");
-
+		
 		//******************* Se obtienen las cuentas en disputa ****************************** 
 		List<Account> accountInDispute = getListAccount(items_to_dispute);
 
@@ -53,6 +54,7 @@ public class GeneratePDFACProcess {
 
 		Map<String,Object> params = new HashMap<String,Object>();
 
+		
 		//Se definen los parametros del encabezado del reporte 
 		params.put("caseNumber", getValue(dispute,"case_number"));
 		params.put("agent", getValue(assigned_agent,"full_name")); 
@@ -71,6 +73,7 @@ public class GeneratePDFACProcess {
 		params.put("numberAccountCreditNotDispute",getNumberTypeAccont(accountNotInDispute,"credit"));
 		params.put("accountNotInDispute", accountNotInDispute);
 
+		
 		InputStream inSRAccountInDispute = getClass().getResourceAsStream("/resources/reports/subAccountInDispute.jasper"); 
 		JasperReport subReportinSRAccountInDispute = (JasperReport)JRLoader.loadObject(inSRAccountInDispute); 
 		params.put("SUBREPORT_DIR_AccountInDispute", subReportinSRAccountInDispute);
@@ -78,15 +81,20 @@ public class GeneratePDFACProcess {
 		InputStream inSRAccountNotInDispute = getClass().getResourceAsStream("/resources/reports/subAccountNotInDispute.jasper"); 
 		JasperReport subReportAccountNotInDispute = (JasperReport)JRLoader.loadObject(inSRAccountNotInDispute); 
 		params.put("SUBREPORT_DIR_AccountNotInDispute", subReportAccountNotInDispute);
-
-		InputStream inImageLogo = getClass().getResourceAsStream("/resources/images/logoVerde.png");
+		
+		InputStream inImageLogo = getClass().getResourceAsStream("/resources/images/nuevo_lcs_logo.jpg");
 		Image imageLogo = ImageIO.read(inImageLogo);
 		params.put("LOGO",imageLogo);
-
+		
+		InputStream inBarraIzquierda = getClass().getResourceAsStream("/resources/images/bordeSuperiorTemplateInvertido.png");
+		Image imageBarraIzquierda = ImageIO.read(inBarraIzquierda);
+		params.put("barraIzquierda",imageBarraIzquierda);
+		
 		File file = generatePDF("resources/reports/templateACProcess.jasper",params);
 
 		result = getStringBase64(file);
-
+	
+		System.out.println("Se Genero el base64 de forma exitosa!!!");
 		return result;
 
 	}

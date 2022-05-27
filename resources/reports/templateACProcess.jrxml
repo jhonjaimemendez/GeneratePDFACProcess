@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Jaspersoft Studio version 6.16.0.final using JasperReports Library version 6.16.0-48579d909b7943b64690c65c71e07e0b80981928  -->
+<!-- Created with Jaspersoft Studio version 6.18.1.final using JasperReports Library version 6.18.1-9d75d1969e774d4f179fb3be8401e98a0e6d1611  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="TemplateACProcess" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="237cde58-42be-455a-8f9f-41487428eaf2">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<subDataset name="CollectionAccountDispute" whenResourceMissingType="Empty" uuid="ded05636-9dd1-40ef-b755-283014d9191e">
@@ -31,6 +31,7 @@
 	<parameter name="SUBREPORT_DIR_AccountInDispute" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
 	<parameter name="SUBREPORT_DIR_AccountNotInDispute" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
 	<parameter name="LOGO" class="java.awt.Image" isForPrompting="false"/>
+	<parameter name="barraIzquierda" class="java.awt.Image" isForPrompting="false"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -41,15 +42,19 @@
 	<title>
 		<band height="55" splitType="Stretch">
 			<staticText>
-				<reportElement x="340" y="0" width="215" height="40" uuid="2d4f875f-00a3-4aec-af89-3f69fe85b2ae"/>
+				<reportElement x="280" y="0" width="215" height="40" uuid="2d4f875f-00a3-4aec-af89-3f69fe85b2ae"/>
 				<textElement textAlignment="Right">
 					<font size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Account Report]]></text>
 			</staticText>
 			<image>
-				<reportElement x="0" y="0" width="110" height="40" uuid="430e1d1e-29b6-450d-bf55-00c4b909bd61"/>
+				<reportElement x="0" y="0" width="130" height="50" uuid="430e1d1e-29b6-450d-bf55-00c4b909bd61"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="507" y="-2" width="49" height="50" uuid="e93d8067-8083-4dc4-858a-195dca3031a0"/>
+				<imageExpression><![CDATA[$P{barraIzquierda}]]></imageExpression>
 			</image>
 		</band>
 	</title>

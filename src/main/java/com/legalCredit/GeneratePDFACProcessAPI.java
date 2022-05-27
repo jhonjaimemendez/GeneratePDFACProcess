@@ -56,8 +56,6 @@ public class GeneratePDFACProcessAPI  implements RequestStreamHandler, RequestHa
 			
 		} catch (Exception e) {
 			
-			System.out.println(payload);
-			
 			throw new RuntimeException(getError(e.getMessage()).toString());
 			
 		} 
