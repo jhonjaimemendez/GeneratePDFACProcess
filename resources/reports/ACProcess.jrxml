@@ -38,6 +38,16 @@
 		<field name="type" class="java.lang.String"/>
 		<field name="reason" class="java.lang.String"/>
 	</subDataset>
+	<subDataset name="DatasetAccountSummary" uuid="cf24501d-19fa-4afe-b8cc-87a3110d3cfd">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+		<field name="item" class="java.lang.String"/>
+		<field name="value" class="java.lang.String"/>
+		<field name="item2" class="java.lang.String"/>
+		<field name="value2" class="java.lang.String"/>
+	</subDataset>
 	<parameter name="bureau" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="caseNumber" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="agent" class="java.lang.String" isForPrompting="false"/>
@@ -46,10 +56,6 @@
 	<parameter name="dateGenerated" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="status" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="accountInDispute" class="java.util.List" isForPrompting="false"/>
-	<parameter name="numberAccountPublics" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="numberAccountCollections" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="numberAccountInquires" class="java.lang.String" isForPrompting="false"/>
-	<parameter name="numberAccountCredit" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="numberAccountPublicNotDispute" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="numberAccountCollectionsNotDispute" class="java.lang.String" isForPrompting="false"/>
 	<parameter name="numberAccountCreditNotDispute" class="java.lang.String" isForPrompting="false"/>
@@ -58,6 +64,14 @@
 	<parameter name="SUBREPORT_DIR_AccountInDispute" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
 	<parameter name="SUBREPORT_DIR_AccountNotInDispute" class="net.sf.jasperreports.engine.JasperReport" isForPrompting="false"/>
 	<parameter name="LOGO" class="java.awt.Image" isForPrompting="false"/>
+	<parameter name="barraIzquierda" class="java.awt.Image" isForPrompting="false"/>
+	<parameter name="accountsSummary" class="java.util.List"/>
+	<parameter name="accountInDisputeExperian" class="java.util.List"/>
+	<parameter name="accountInDisputeTransunion" class="java.util.List"/>
+	<parameter name="accountInDisputeEquifax" class="java.util.List"/>
+	<parameter name="accountInDisputeTransunionSummary" class="java.util.List"/>
+	<parameter name="accountInDisputeExperianSummary" class="java.util.List"/>
+	<parameter name="accountInDisputeEquifaxSummary" class="java.util.List"/>
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
@@ -68,22 +82,26 @@
 	<title>
 		<band height="73" splitType="Stretch">
 			<staticText>
-				<reportElement x="340" y="13" width="215" height="40" forecolor="#323E48" uuid="2d4f875f-00a3-4aec-af89-3f69fe85b2ae"/>
+				<reportElement x="282" y="7" width="215" height="40" forecolor="#323E48" uuid="2d4f875f-00a3-4aec-af89-3f69fe85b2ae"/>
 				<textElement textAlignment="Right">
 					<font fontName="FontFamilyNeue" size="24" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Accounts Report]]></text>
 			</staticText>
 			<image>
-				<reportElement x="0" y="0" width="110" height="40" uuid="430e1d1e-29b6-450d-bf55-00c4b909bd61"/>
+				<reportElement x="0" y="0" width="130" height="50" uuid="a73962d5-606e-4326-a906-0d050dcef778"/>
 				<imageExpression><![CDATA[$P{LOGO}]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="521" y="1" width="49" height="50" uuid="1cb66e5e-1a7c-4963-a068-afe3ab5044bb"/>
+				<imageExpression><![CDATA[$P{barraIzquierda}]]></imageExpression>
 			</image>
 		</band>
 	</title>
 	<columnHeader>
 		<band height="83">
 			<staticText>
-				<reportElement x="0" y="9" width="90" height="20" forecolor="#323E48" uuid="3d0b86c6-35b8-4fd8-9b98-c0ad77214f84"/>
+				<reportElement x="0" y="9" width="90" height="20" forecolor="#333F48" uuid="3d0b86c6-35b8-4fd8-9b98-c0ad77214f84"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="FontFamilyNeue" size="12" isBold="true"/>
 				</textElement>
@@ -97,8 +115,8 @@
 				<textFieldExpression><![CDATA[$P{client}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="432" y="9" width="70" height="20" forecolor="#323E48" uuid="2c4e2a66-bdf6-44d4-a264-2f658fc277b9"/>
-				<textElement textAlignment="Left" verticalAlignment="Middle">
+				<reportElement x="420" y="9" width="82" height="20" forecolor="#333F48" uuid="2c4e2a66-bdf6-44d4-a264-2f658fc277b9"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="FontFamilyNeue" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Date Report]]></text>
@@ -111,7 +129,7 @@
 				<textFieldExpression><![CDATA[$P{date}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="205" y="9" width="90" height="20" forecolor="#323E48" uuid="7fb330e8-3655-418f-af66-75471ce49955"/>
+				<reportElement x="205" y="9" width="90" height="20" forecolor="#333F48" uuid="7fb330e8-3655-418f-af66-75471ce49955"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="FontFamilyNeue" size="12" isBold="true"/>
 				</textElement>
@@ -125,7 +143,7 @@
 				<textFieldExpression><![CDATA[$P{caseNumber}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="0" y="44" width="128" height="20" forecolor="#323E48" uuid="957a84eb-e64f-4926-9bc9-7345782392f6"/>
+				<reportElement x="0" y="44" width="128" height="20" forecolor="#333F48" uuid="957a84eb-e64f-4926-9bc9-7345782392f6"/>
 				<textElement textAlignment="Left" verticalAlignment="Middle">
 					<font fontName="FontFamilyNeue" size="12" isBold="true"/>
 				</textElement>
@@ -139,7 +157,7 @@
 				<textFieldExpression><![CDATA[$P{agent}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="432" y="44" width="70" height="20" forecolor="#323E48" uuid="a897f60b-fd21-44e8-b82f-ab64c454198b"/>
+				<reportElement x="432" y="44" width="70" height="20" forecolor="#333F48" uuid="a897f60b-fd21-44e8-b82f-ab64c454198b"/>
 				<textElement textAlignment="Right" verticalAlignment="Middle">
 					<font fontName="FontFamilyNeue" size="12" isBold="true"/>
 				</textElement>
@@ -155,24 +173,20 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="100" splitType="Stretch">
+		<band height="165" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<subreport>
-				<reportElement isPrintRepeatedValues="false" x="0" y="74" width="572" height="22" isRemoveLineWhenBlank="true" uuid="00b28844-d419-4e38-bf55-cfa766064120"/>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="91" width="572" height="22" isRemoveLineWhenBlank="true" uuid="00b28844-d419-4e38-bf55-cfa766064120">
+					<printWhenExpression><![CDATA[$P{accountInDisputeEquifax}.size()>0]]></printWhenExpression>
+				</reportElement>
 				<subreportParameter name="accountInDispute">
-					<subreportParameterExpression><![CDATA[$P{accountInDispute}]]></subreportParameterExpression>
+					<subreportParameterExpression><![CDATA[$P{accountInDisputeEquifax}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="numberAccountCollections">
-					<subreportParameterExpression><![CDATA[$P{numberAccountCollections}]]></subreportParameterExpression>
+				<subreportParameter name="bureau">
+					<subreportParameterExpression><![CDATA["EQUIFAX"]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="numberAccountCredit">
-					<subreportParameterExpression><![CDATA[$P{numberAccountCredit}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="numberAccountInquires">
-					<subreportParameterExpression><![CDATA[$P{numberAccountInquires}]]></subreportParameterExpression>
-				</subreportParameter>
-				<subreportParameter name="numberAccountPublics">
-					<subreportParameterExpression><![CDATA[$P{numberAccountPublics}]]></subreportParameterExpression>
+				<subreportParameter name="accountsSummary">
+					<subreportParameterExpression><![CDATA[$P{accountInDisputeEquifaxSummary}]]></subreportParameterExpression>
 				</subreportParameter>
 				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR_AccountInDispute}]]></subreportExpression>
@@ -186,7 +200,7 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="FontFamilyNeue" size="15" isBold="true"/>
 				</textElement>
-				<text><![CDATA[ACOUNTS SUMMARY]]></text>
+				<text><![CDATA[ACOUNTS DISPUTE SUMMARY]]></text>
 			</staticText>
 			<componentElement>
 				<reportElement mode="Transparent" x="0" y="35" width="572" height="28" forecolor="#FFFFFF" backcolor="#323E48" uuid="5aa8e01d-c02b-4945-b571-bf08ac28d7b8">
@@ -197,13 +211,13 @@
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
-					<datasetRun subDataset="DatasetReportSummary" uuid="e0418ef0-b725-4c78-9449-53641f7aa0ff">
-						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{reportSummary})]]></dataSourceExpression>
+					<datasetRun subDataset="DatasetAccountSummary" uuid="528baa4b-996b-4943-9cff-c5151d39b392">
+						<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{accountsSummary})]]></dataSourceExpression>
 					</datasetRun>
-					<jr:column width="178" uuid="e625adb9-b6d9-494a-ae72-185ad3a5870c">
+					<jr:column width="176" uuid="e625adb9-b6d9-494a-ae72-185ad3a5870c">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
 						<jr:detailCell style="Table_TD" height="30">
-							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
 							<box>
 								<pen lineColor="#333F48"/>
@@ -213,7 +227,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textField textAdjust="StretchHeight">
-								<reportElement x="0" y="0" width="178" height="30" forecolor="#333F48" uuid="b4c13f26-76c3-4102-b11e-d5e4e34df93b">
+								<reportElement x="0" y="0" width="176" height="30" forecolor="#333F48" uuid="b4c13f26-76c3-4102-b11e-d5e4e34df93b">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
 								<textElement verticalAlignment="Middle">
@@ -223,7 +237,7 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="135" uuid="fd9cfa20-c7be-4bb3-a85f-7e662684db4e">
+					<jr:column width="100" uuid="fd9cfa20-c7be-4bb3-a85f-7e662684db4e">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -236,7 +250,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textField>
-								<reportElement x="0" y="0" width="135" height="30" forecolor="#333F48" uuid="5476e187-ef50-4e9e-9568-77065db31a9b">
+								<reportElement x="0" y="0" width="100" height="30" forecolor="#333F48" uuid="5476e187-ef50-4e9e-9568-77065db31a9b">
 									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
 								</reportElement>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
@@ -246,7 +260,7 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="16" uuid="a2f16306-8f9c-4cb8-96be-578977d2fc37">
+					<jr:column width="20" uuid="a2f16306-8f9c-4cb8-96be-578977d2fc37">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -259,7 +273,7 @@
 							</box>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="100" uuid="918f442d-d72b-47fa-a319-adf18eb3c383">
+					<jr:column width="176" uuid="918f442d-d72b-47fa-a319-adf18eb3c383">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -271,7 +285,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textField>
-								<reportElement mode="Transparent" x="0" y="0" width="100" height="30" forecolor="#333F48" uuid="d1f300e4-97df-48cf-9417-53f021569594"/>
+								<reportElement mode="Transparent" x="0" y="0" width="176" height="30" forecolor="#333F48" uuid="d1f300e4-97df-48cf-9417-53f021569594"/>
 								<textElement verticalAlignment="Middle">
 									<font fontName="FontFamilyNeue" size="12"/>
 								</textElement>
@@ -279,7 +293,7 @@
 							</textField>
 						</jr:detailCell>
 					</jr:column>
-					<jr:column width="143" uuid="0aaca3f7-3eef-4275-bdaa-092fe3f1958a">
+					<jr:column width="100" uuid="0aaca3f7-3eef-4275-bdaa-092fe3f1958a">
 						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
 						<jr:detailCell style="Table_TD" height="30">
 							<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -291,7 +305,7 @@
 								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
 							</box>
 							<textField>
-								<reportElement key="" x="0" y="0" width="143" height="30" forecolor="#333F48" uuid="805c6cd8-9689-4c8d-b4bd-77eb5a6cd1b5"/>
+								<reportElement key="" x="0" y="0" width="100" height="30" forecolor="#333F48" uuid="805c6cd8-9689-4c8d-b4bd-77eb5a6cd1b5"/>
 								<textElement textAlignment="Right" verticalAlignment="Middle">
 									<font fontName="FontFamilyNeue" size="12"/>
 								</textElement>
@@ -301,11 +315,53 @@
 					</jr:column>
 				</jr:table>
 			</componentElement>
+			<line>
+				<reportElement x="0" y="94" width="572" height="1" forecolor="#333F48" backcolor="#333F48" uuid="a74595f0-a308-4e3f-94c8-850cd0af37d6">
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+				</reportElement>
+				<graphicElement>
+					<pen lineWidth="1.6" lineColor="#333F48"/>
+				</graphicElement>
+			</line>
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="117" width="572" height="22" isRemoveLineWhenBlank="true" uuid="26214a66-65a4-498e-8631-cd16bfade47b">
+					<printWhenExpression><![CDATA[$P{accountInDisputeExperian}.size()>0]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="accountInDispute">
+					<subreportParameterExpression><![CDATA[$P{accountInDisputeExperian}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bureau">
+					<subreportParameterExpression><![CDATA["EXPERIAN"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="accountsSummary">
+					<subreportParameterExpression><![CDATA[$P{accountInDisputeExperianSummary}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR_AccountInDispute}]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement positionType="Float" isPrintRepeatedValues="false" x="0" y="143" width="572" height="22" isRemoveLineWhenBlank="true" uuid="f8662f61-7542-439a-a661-880a2d16e969">
+					<printWhenExpression><![CDATA[$P{accountInDisputeTransunion}.size()>0]]></printWhenExpression>
+				</reportElement>
+				<subreportParameter name="accountInDispute">
+					<subreportParameterExpression><![CDATA[$P{accountInDisputeTransunion}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="bureau">
+					<subreportParameterExpression><![CDATA["TRANSUNION"]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="accountsSummary">
+					<subreportParameterExpression><![CDATA[$P{accountInDisputeTransunionSummary}]]></subreportParameterExpression>
+				</subreportParameter>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.JREmptyDataSource()]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR_AccountInDispute}]]></subreportExpression>
+			</subreport>
 		</band>
-		<band height="50">
+		<band height="60">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<subreport>
-				<reportElement x="0" y="6" width="572" height="31" uuid="7c157776-1e62-4235-9af9-41443dd44060"/>
+				<reportElement x="0" y="22" width="572" height="31" uuid="7c157776-1e62-4235-9af9-41443dd44060"/>
 				<subreportParameter name="accountNotInDispute">
 					<subreportParameterExpression><![CDATA[$P{accountNotInDispute}]]></subreportParameterExpression>
 				</subreportParameter>
@@ -329,11 +385,11 @@
 	<pageFooter>
 		<band height="31" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="3" width="140" height="21" uuid="0e742da8-3635-4e79-852b-89d90297033b"/>
+				<reportElement x="0" y="9" width="200" height="21" uuid="0e742da8-3635-4e79-852b-89d90297033b"/>
 				<textElement>
 					<font fontName="FontFamilyNeue" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{dateGenerated}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Date Generated " + $P{dateGenerated}]]></textFieldExpression>
 			</textField>
 			<line>
 				<reportElement x="0" y="2" width="572" height="1" backcolor="#92989E" uuid="cab4da66-d813-43d9-8e1e-666c4c57cd95">
@@ -347,7 +403,7 @@
 				</graphicElement>
 			</line>
 			<textField>
-				<reportElement x="512" y="6" width="49" height="15" forecolor="#323E48" uuid="7594ae7e-6878-4fc6-b197-5c75f158eb23">
+				<reportElement x="512" y="12" width="49" height="15" forecolor="#323E48" uuid="7594ae7e-6878-4fc6-b197-5c75f158eb23">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
@@ -357,7 +413,7 @@
 				<textFieldExpression><![CDATA["Page " + $V{PAGE_NUMBER} + " of"]]></textFieldExpression>
 			</textField>
 			<textField evaluationTime="Report">
-				<reportElement x="561" y="6" width="11" height="15" forecolor="#323E48" uuid="d2f1078f-521a-4549-b49c-0ab80e269a79"/>
+				<reportElement x="561" y="12" width="11" height="15" forecolor="#323E48" uuid="d2f1078f-521a-4549-b49c-0ab80e269a79"/>
 				<textElement textAlignment="Right">
 					<font fontName="FontFamilyNeue" size="8"/>
 				</textElement>
