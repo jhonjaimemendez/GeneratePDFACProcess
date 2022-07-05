@@ -54,31 +54,31 @@
 	<background>
 		<band splitType="Stretch"/>
 	</background>
-	<title>
-		<band height="65">
+	<columnHeader>
+		<band height="60" splitType="Stretch">
 			<textField>
-				<reportElement mode="Opaque" x="5" y="5" width="570" height="23" forecolor="#FFFFFF" backcolor="#323E48" uuid="cb55e360-b33d-4800-b9a9-c6a74c38c66b">
+				<reportElement mode="Opaque" x="0" y="0" width="570" height="23" forecolor="#FFFFFF" backcolor="#323E48" uuid="0ff7cb7b-90c3-447e-90e7-3b28097c4659">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="FontFamilyNeue" size="15" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA["ACCOUNTS DISPUTE " +  $P{bureau}.toUpperCase()]]></textFieldExpression>
+				<textFieldExpression><![CDATA["ACCOUNTS NOT DISPUTE " +  $P{bureau}.toUpperCase()]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="5" y="36" width="570" height="29" uuid="553d1f6a-f7e6-4996-a5ab-16bdac643cf1"/>
+				<reportElement x="0" y="31" width="570" height="29" uuid="c372a75c-7890-45a3-8481-56fa48e9ea94"/>
 				<textElement>
 					<font fontName="FontFamilyNeue" size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA["Accounts to dispute on " + $P{bureau}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Accounts not dispute on " + $P{bureau}]]></textFieldExpression>
 			</textField>
 		</band>
-	</title>
+	</columnHeader>
 	<detail>
-		<band height="154" splitType="Stretch">
+		<band height="154" splitType="Prevent">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<componentElement>
-				<reportElement positionType="Float" x="0" y="5" width="570" height="50" uuid="090f1d91-df10-43a3-816c-08c081fe79c1">
+				<reportElement x="0" y="5" width="570" height="50" uuid="090f1d91-df10-43a3-816c-08c081fe79c1">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -184,7 +184,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement positionType="Float" mode="Transparent" x="0" y="100" width="572" height="28" forecolor="#FFFFFF" backcolor="#323E48" uuid="35aeb19b-3c0f-40c6-a14b-0391866121de">
+				<reportElement mode="Transparent" x="0" y="98" width="572" height="28" forecolor="#FFFFFF" backcolor="#323E48" uuid="35aeb19b-3c0f-40c6-a14b-0391866121de">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
@@ -297,7 +297,7 @@
 				</jr:table>
 			</componentElement>
 			<line>
-				<reportElement positionType="Float" x="0" y="101" width="572" height="1" forecolor="#333F48" backcolor="#333F48" uuid="53a26941-540f-4405-9159-0165192c27fd">
+				<reportElement positionType="Float" x="0" y="99" width="572" height="1" forecolor="#333F48" backcolor="#333F48" uuid="53a26941-540f-4405-9159-0165192c27fd">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -307,7 +307,7 @@
 				</graphicElement>
 			</line>
 			<line>
-				<reportElement positionType="Float" x="0" y="128" width="572" height="1" forecolor="#333F48" backcolor="#333F48" uuid="1bac04b3-ba2a-4718-a936-9b756e460aa5">
+				<reportElement positionType="Float" x="0" y="126" width="572" height="1" forecolor="#333F48" backcolor="#333F48" uuid="1bac04b3-ba2a-4718-a936-9b756e460aa5">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -317,7 +317,7 @@
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement positionType="Float" x="0" y="77" width="170" height="30" forecolor="#4859BB" uuid="2c996569-966d-4550-9911-ce3bc4c882fe"/>
+				<reportElement positionType="Float" x="0" y="75" width="170" height="30" forecolor="#4859BB" uuid="2c996569-966d-4550-9911-ce3bc4c882fe"/>
 				<textElement>
 					<font fontName="FontFamilyNeue" size="14" isBold="true"/>
 				</textElement>

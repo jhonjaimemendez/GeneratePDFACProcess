@@ -1,7 +1,6 @@
 package com.legalCredit.generateACProcess;
 
 import static com.legalCredit.components.GeneratePDF.generatePDF;
-import static com.legalCredit.components.Utils.getDate;
 import static com.legalCredit.components.Utils.getStringBase64;
 
 import java.awt.Image;
@@ -58,17 +57,18 @@ public class GeneratePDFACProcess {
 		List<Account> accountInDisputeTransunion = getAccountsDisputeByBureau(accountInDispute,"transunion");
 		List<Account> accountInDisputeEquifax = getAccountsDisputeByBureau(accountInDispute,"equifax");
 				
-		//******************* Se obtienen las cuentas en no disputa************************** 
+		//******************* Se obtienen las cuentasno disputadas ************************** 
 		List<Account> accountNotInDispute = getListAccount(items_not_to_dispute); 
+		List<Account> accountNotDisputeExperian = getAccountsDisputeByBureau(accountNotInDispute,"experian");
+		List<Account> accountNotDisputeTransunion = getAccountsDisputeByBureau(accountNotInDispute,"transunion");
+		List<Account> accountNotDisputeEquifax = getAccountsDisputeByBureau(accountNotInDispute,"equifax");
 
-		//******************* Se define la fila de la tabla **************************
+		//******************* Se el account summary **************************
 		List<Summary> accountsSumaryList = new ArrayList<Summary>();
 		Summary firstRow = new Summary("Total Credit Accounts",getNumberTypeAccont(accountInDispute,"credit"),"Total Public Accounts",getNumberTypeAccont(accountInDispute,"public"));
 		Summary secondRow = new Summary("Total Collections Accounts",getNumberTypeAccont(accountInDispute,"collection"),"Total Inquiries Account ",getNumberTypeAccont(accountInDispute,"inquiry"));
 		accountsSumaryList.add(firstRow);
 		accountsSumaryList.add(secondRow);
-		
-		
 		
 		
 		Map<String,Object> params = new HashMap<String,Object>();
@@ -114,21 +114,53 @@ public class GeneratePDFACProcess {
 		params.put("accountInDisputeTransunionSummary", accountsSumaryListTransunion);
 		
 		
+		//******************* Se el account summary de ls cuentas no disputas **************************
+		List<Summary> accountsNotDisputeSumaryList = new ArrayList<Summary>();
+		Summary firstRowNotDispute = new Summary("Total Credit Accounts",getNumberTypeAccont(accountNotInDispute,"credit"),"Total Public Accounts",getNumberTypeAccont(accountNotInDispute,"public"));
+		Summary secondRowNotDispute = new Summary("Total Collections Accounts",getNumberTypeAccont(accountNotInDispute,"collection"),"Total Inquiries Account ",getNumberTypeAccont(accountNotInDispute,"inquiry"));
+		accountsNotDisputeSumaryList.add(firstRowNotDispute);
+		accountsNotDisputeSumaryList.add(secondRowNotDispute);
 		
-		
-		
-		params.put("numberAccountPublicNotDispute", getNumberTypeAccont(accountNotInDispute,"public"));
-		params.put("numberAccountCollectionsNotDispute",getNumberTypeAccont(accountNotInDispute,"collection"));
-		params.put("numberAccountInquiresNotDispute",getNumberTypeAccont(accountNotInDispute,"inquiry"));
-		params.put("numberAccountCreditNotDispute",getNumberTypeAccont(accountNotInDispute,"credit"));
 		params.put("accountNotInDispute", accountNotInDispute);
+		params.put("accountsNotDisputeSummary",accountsNotDisputeSumaryList);
 
+		//Parametros para equifax
+		List<Summary> accountsSumaryListNotDisputeEquifax = new ArrayList<Summary>();
+		Summary firstRowNotEquifax = new Summary("Credit Accounts",getNumberTypeAccont(accountNotDisputeEquifax,"credit"),"Public Accounts",getNumberTypeAccont(accountNotDisputeEquifax,"public"));
+		Summary secondRowNotEquifax = new Summary("Collections Accounts",getNumberTypeAccont(accountNotDisputeEquifax,"collection"),"Inquiries Account ",getNumberTypeAccont(accountNotDisputeEquifax,"inquiry"));
+		accountsSumaryListNotDisputeEquifax.add(firstRowNotEquifax);
+		accountsSumaryListNotDisputeEquifax.add(secondRowNotEquifax);
+		
+		params.put("accountNotDisputeEquifax", accountNotDisputeEquifax);
+		params.put("accountNotDisputeEquifaxSummary",accountsSumaryListNotDisputeEquifax);
+		
+		//Parametros para experian
+		List<Summary> accountsSumaryListNotDisputeExperian = new ArrayList<Summary>();
+		Summary firstRowNotExperian = new Summary("Credit Accounts",getNumberTypeAccont(accountNotDisputeExperian,"credit"),"Public Accounts",getNumberTypeAccont(accountNotDisputeExperian,"public"));
+		Summary secondRowNotExperian = new Summary("Collections Accounts",getNumberTypeAccont(accountNotDisputeExperian,"collection"),"Inquiries Account ",getNumberTypeAccont(accountNotDisputeExperian,"inquiry"));
+		accountsSumaryListNotDisputeExperian.add(firstRowNotExperian);
+		accountsSumaryListNotDisputeExperian.add(secondRowNotExperian);
+		
+		params.put("accountNotDisputeExperian", accountNotDisputeExperian);
+		params.put("accountNotDisputeExperianSummary",accountsSumaryListNotDisputeExperian);
+		
+		//Parametros para experian
+		List<Summary> accountsSumaryListNotDisputeTransunion = new ArrayList<Summary>();
+		Summary firstRowNotTransunion = new Summary("Credit Accounts",getNumberTypeAccont(accountNotDisputeTransunion,"credit"),"Public Accounts",getNumberTypeAccont(accountNotDisputeTransunion,"public"));
+		Summary secondRowNotTransunion = new Summary("Collections Accounts",getNumberTypeAccont(accountNotDisputeTransunion,"collection"),"Inquiries Account ",getNumberTypeAccont(accountNotDisputeTransunion,"inquiry"));
+		accountsSumaryListNotDisputeTransunion.add(firstRowNotTransunion);
+		accountsSumaryListNotDisputeTransunion.add(secondRowNotTransunion);
+		
+		params.put("accountNotDisputeTransunion", accountNotDisputeTransunion);
+		params.put("accountNotDisputeTransunionSummary",accountsSumaryListNotDisputeTransunion);
+		
+		
 		
 		InputStream inSRAccountInDispute = getClass().getResourceAsStream("/resources/reports/subAccountInDisputeByBureau.jasper"); 
 		JasperReport subReportinSRAccountInDispute = (JasperReport)JRLoader.loadObject(inSRAccountInDispute); 
 		params.put("SUBREPORT_DIR_AccountInDispute", subReportinSRAccountInDispute);
 
-		InputStream inSRAccountNotInDispute = getClass().getResourceAsStream("/resources/reports/subAccountNotInDispute.jasper"); 
+		InputStream inSRAccountNotInDispute = getClass().getResourceAsStream("/resources/reports/subAccountNotDisputeByBureau.jasper"); 
 		JasperReport subReportAccountNotInDispute = (JasperReport)JRLoader.loadObject(inSRAccountNotInDispute); 
 		params.put("SUBREPORT_DIR_AccountNotInDispute", subReportAccountNotInDispute);
 		
