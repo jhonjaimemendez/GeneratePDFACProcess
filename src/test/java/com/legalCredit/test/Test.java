@@ -18,7 +18,7 @@ public class Test {
 		try {
 			
 			String pathHome = "resources/test/";
-			String nameFile = "test3.json";
+			String nameFile = "ac_payload.json";
 			String ruta = pathHome + nameFile;
 			String rutaSalida = "C:\\temp\\reportes\\ArchivosGenerados\\"
 					+ "acprocess" +  Utils.getDateTime() + ".pdf";

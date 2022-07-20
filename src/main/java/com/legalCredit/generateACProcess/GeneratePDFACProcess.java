@@ -45,7 +45,6 @@ public class GeneratePDFACProcess {
 		JSONObject ac_payload = rootJSON.getJSONObject("ac_payload"); 
 		JSONObject dispute = ac_payload.getJSONObject("dispute");
 		JSONObject assigned_agent = dispute.getJSONObject("assigned_agent");
-		JSONObject account = dispute.getJSONObject("account");
 		JSONObject status = dispute.getJSONObject("status");
 		JSONArray items_to_dispute = getValueArray(ac_payload,"items_to_dispute");
 		JSONArray items_not_to_dispute = getValueArray(ac_payload,"items_not_to_dispute");
@@ -78,7 +77,7 @@ public class GeneratePDFACProcess {
 		params.put("accountsSummary",accountsSumaryList);
 		params.put("caseNumber", getValue(dispute,"case_number"));
 		params.put("agent", getValue(assigned_agent,"full_name")); 
-		params.put("client",getValue(account,"first_name")); 
+		params.put("client",getValue(dispute,"sf_client_full_name")); 
 		params.put("date",getValue(dispute,"init_date")); 
 		params.put("dateGenerated", getDatePuertoRico());
 		params.put("status",getValue(status,"name"));

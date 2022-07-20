@@ -51,6 +51,7 @@ public class GeneratePDFACProcessAPI  implements RequestStreamHandler, RequestHa
 		 
 		try {
 			
+			System.out.println("Payload Recibido: " + payload);
 			String result = new GeneratePDFACProcess().generatePDFAccessProcess(payload);
 			output.write(result.getBytes());
 			
