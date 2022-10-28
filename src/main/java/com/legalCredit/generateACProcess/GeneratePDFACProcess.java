@@ -197,7 +197,7 @@ public class GeneratePDFACProcess {
 	
 	private List<Account> getAccountsDisputeByBureau(List<Account> accountInDispute, String bureau) {
 		
-		return accountInDispute.stream().filter(account-> account.getBureau().equalsIgnoreCase(bureau)).
+		return accountInDispute.stream().filter(account-> account.getBureau().toLowerCase().contains(bureau)).
 				collect(Collectors.toList());
 	}
 
