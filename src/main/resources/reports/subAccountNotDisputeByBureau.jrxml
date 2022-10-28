@@ -184,7 +184,7 @@
 				</jr:table>
 			</componentElement>
 			<componentElement>
-				<reportElement mode="Transparent" x="0" y="98" width="572" height="28" forecolor="#FFFFFF" backcolor="#323E48" uuid="35aeb19b-3c0f-40c6-a14b-0391866121de">
+				<reportElement positionType="Float" mode="Transparent" x="0" y="98" width="572" height="28" forecolor="#FFFFFF" backcolor="#323E48" uuid="35aeb19b-3c0f-40c6-a14b-0391866121de">
 					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
 					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
 					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
